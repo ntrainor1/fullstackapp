@@ -17,8 +17,11 @@ import {
 } from "./graphql/mutations";
 import { Amplify } from 'aws-amplify';
 import config from './aws-exports.js';
+import { generateClient } from 'aws-amplify/api';
 
 Amplify.configure(config);
+
+const client = generateClient();
 
 function App({ signOut }) {
   const [notes, setNotes] = useState([]);
@@ -28,7 +31,7 @@ function App({ signOut }) {
   }, []);
 
   async function fetchNotes() {
-    const apiData = await api.graphql({ query: listNotes });
+    const apiData = await client.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
     setNotes(notesFromAPI);
   }
@@ -40,7 +43,7 @@ function App({ signOut }) {
       name: form.get("name"),
       description: form.get("description"),
     };
-    await api.graphql({
+    await client.graphql({
       query: createNoteMutation,
       variables: { input: data },
     });
@@ -51,7 +54,7 @@ function App({ signOut }) {
   async function deleteNote({ id }) {
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
-    await api.graphql({
+    await client.graphql({
       query: deleteNoteMutation,
       variables: { input: { id } },
     });
