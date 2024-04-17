@@ -1,4 +1,24 @@
 {
+  "api": {
+    "fullstackapp": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDate": "2025-04-17T21:40:20.051Z",
+              "apiKeyExpirationDays": 365,
+              "description": "API key for the sample fullstackapp API"
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
   "auth": {
     "fullstackappa205a5da": {
       "customAuth": false,
