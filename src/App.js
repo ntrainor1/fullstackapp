@@ -17,12 +17,13 @@ import {
   deleteNote as deleteNoteMutation,
 } from "./graphql/mutations";
 import { Amplify, Storage } from 'aws-amplify';
-import config from './aws-exports.js';
+import apiConfig from './aws-exports.js';
+import storageConfig from './amplifyconfiguration.json';
 import { generateClient } from 'aws-amplify/api';
 
-Amplify.configure(config);
-
-const client = generateClient();
+Amplify.configure(apiConfig);
+Amplify.configure(storageConfig);
+const apiClient = generateClient();
 
 function App({ signOut }) {
   const [notes, setNotes] = useState([]);
@@ -32,7 +33,7 @@ function App({ signOut }) {
   }, []);
 
   async function fetchNotes() {
-    const apiData = await client.graphql({ query: listNotes });
+    const apiData = await apiClient.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
     await Promise.all(
       notesFromAPI.map(async (note) => {
