@@ -17,6 +17,9 @@
       },
       "api": {
         "fullstackapp": {}
+      },
+      "storage": {
+        "imagestorage": {}
       }
     }
   }
