@@ -63,7 +63,7 @@ function App({ signOut }) {
       console.log('Error : ', error);
     }
     
-    await client.graphql({ 
+    await apiClient.graphql({ 
       query: createNoteMutation,
       variables: { input: note },
     });
@@ -79,7 +79,7 @@ function App({ signOut }) {
     } catch (error) { 
       console.log('Error ', error);
     }
-    await client.graphql({ 
+    await apiClient.graphql({ 
       query: deleteNoteMutation,
       variables: { input: { id } },
     });
