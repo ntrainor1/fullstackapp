@@ -39,12 +39,9 @@ function App({ signOut }) {
     await Promise.all(
       notesFromAPI.map(async (note) => { 
         if (note.image) { 
-          console.log("note.image: ", note.image);
           const imgUrl = await getUrl({ key: note.name });
-          console.log("imgUrl: ", imgUrl);
-          console.log("imgUrl.url: ", imgUrl.url);
-          console.log("imgUrl.expiresAt: ", imgUrl.expiresAt);
-          note.image = imgUrl;
+          console.log("imgUrl.url.href: ", imgUrl.url.href);
+          note.image = imgUrl.url.href;
         }
         return note;
       })
